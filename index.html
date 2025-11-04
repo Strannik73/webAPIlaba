@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Погода в Беларуси</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Поогода по координатам</h1>
+
+    <form id="coord" class="coord">
+      <label for="lat">Широта</label>
+      <input id="lat" name="lat" inputmode="decimal" placeholder="lat" required />
+
+      <label for="lon">Долгота</label>
+      <input id="lon" name="lon" inputmode="decimal" placeholder="lon" required />
+
+      <div class="pogoda">
+        <button type="submit" id="pogodaBtn">Показать погоду</button>
+      </div>
+
+      <p id="msg" class="msg" aria-live="polite"></p>
+    </form>
+
+    <section id="resultat" class="resultat" aria-live="polite">
+      <div class="top">
+        <h2 id="city">—</h2>
+        <div class="temp" id="temp">—°C</div>
+      </div>
+
+      <div class="weather-row">
+        <img id="kartinka" alt="" class="kartinka" />
+        <div id="txt" class="txt">—</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

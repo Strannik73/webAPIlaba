@@ -1,0 +1,147 @@
+:root{
+    --bg:#8dfae0;
+    --card:#ffffff;
+    --accent:#07a875;
+    --muted:#49957b;
+    --error:#f56262;
+    --radius:12px;
+    font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    color-scheme: light;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+    margin:0;
+    background:linear-gradient(180deg,var(--bg),#eef3ff 60%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    font-size:16px;
+}
+
+.container{
+    width:100%;
+    max-width:520px;
+  
+}
+
+h1{
+    margin:0 0 14px 0;
+    font-size:20px;
+    color:#0f172a;
+}
+
+.coord{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:0 6px 18px rgba(18,38,63,0.08);
+    margin-bottom:14px;
+    border: 2px solid #000;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin-top:8px;
+    margin-bottom:6px;
+  
+}
+
+input{
+    width:100%;
+    padding:10px 12px;
+    font-size:15px;
+    border:1px solid #e6e9ef;
+    border-radius:8px;
+    outline:none;
+}
+
+input:focus{
+    box-shadow:0 0 0 4px rgba(36,99,235,0.08);
+    border-color:var(--accent);
+}
+
+.pogoda{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+    align-items:center;
+}
+
+button{
+    padding:10px 12px;
+    border-radius:8px;
+    border:0;
+    cursor:pointer;
+    font-weight:600;
+    }
+
+#pogodaBtn{
+    background:var(--accent);
+    color:#fff;
+}
+
+.msg{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.hidden{
+    display:none
+}
+
+.resultat{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:0 6px 18px rgba(18,38,63,0.06);
+    margin-top:8px;
+    display:none;
+    border: 2px solid #000;
+}
+
+.resultat .top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+#city{
+    margin:0;
+    font-size:18px;
+}
+
+.temp{
+    margin-right: 15%;
+    font-size:28px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.weather-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:12px;
+    
+}
+
+.kartinka{
+    width:64px;
+    height:64px;
+}
+
+.txt{
+    font-size:16px;
+    color:var(--muted);
+}
+
+.msg.error{
+    color:var(--error)
+}

@@ -13,7 +13,7 @@ const txt = document.getElementById("txt");
 const btn = document.getElementById("pogodaBtn");
 
 
-function pickBackground(desc) {
+function fon(desc) {
   if (!desc) return "linear-gradient(180deg,#f6f8fb,#eef3ff)";
   const s = desc.toLowerCase();
 
@@ -38,12 +38,12 @@ function pickBackground(desc) {
   return "linear-gradient(180deg,#f6f8fb,#ffffff)";
 }
 
-function applyBackground(desc) {
+function applyBk(desc) {
   document.body.style.transition = "background 600ms ease";
-  document.body.style.background = pickBackground(desc);
+  document.body.style.background = fon(desc);
 }
 
-function parseAndValidate(a, b) {
+function parseValid(a, b) {
   const la = Number(a.replace(",", ".").trim());
   const lo = Number(b.replace(",", ".").trim());
   if (!isFinite(la) || !isFinite(lo)) return { error: "Координаты должны быть числами" };
@@ -52,7 +52,7 @@ function parseAndValidate(a, b) {
   return { la, lo };
 }
 
-function buildUrl(la, lo) {
+function Url(la, lo) {
   const p = new URLSearchParams({
     lat: String(la),
     lon: String(lo),
@@ -63,24 +63,24 @@ function buildUrl(la, lo) {
   return `${url}?${p.toString()}`;
 }
 
-function setLoading(on) {
+function load(on) {
   btn.disabled = on;
   msg.textContent = on ? "Загрузка..." : "";
   msg.classList.remove("error");
   if (on) result.style.display = "none";
-  if (on) applyBackground(""); 
+  if (on) applyBk(""); 
 }
 
-function showError(t) {
+function error(t) {
   msg.textContent = t;
   msg.classList.add("error");
   result.style.display = "none";
-  applyBackground(""); 
+  applyBk(""); 
 }
 
-function renderWeather(d) {
+function weather(d) {
   if (!d || !Array.isArray(d.data) || d.data.length === 0) {
-    showError("Неверный ответ от сервера");
+    error("Неверный ответ от сервера");
     return;
   }
   const it = d.data[0];
@@ -105,7 +105,7 @@ function renderWeather(d) {
   msg.classList.remove("error");
   result.style.display = "block";
 
-  applyBackground(descr);
+  applyBk(descr);
 }
 
 form.addEventListener("submit", async (ev) => {
@@ -113,14 +113,14 @@ form.addEventListener("submit", async (ev) => {
   msg.classList.remove("error");
   result.style.display = "none";
 
-  const { la, lo, error } = parseAndValidate(lat.value, lon.value);
+  const { la, lo, error } = parseValid(lat.value, lon.value);
   if (error) {
-    showError(error);
+    error(error);
     return;
   }
 
-  const fullUrl = buildUrl(la, lo);
-  setLoading(true);
+  const fullUrl = Url(la, lo);
+  load(true);
 
   try {
     const res = await fetch(fullUrl, { method: "GET", cache: "no-store" });
@@ -131,14 +131,14 @@ form.addEventListener("submit", async (ev) => {
       throw new Error(`Ошибка сети: ${res.status} ${res.statusText}`);
     }
     const data = await res.json();
-    renderWeather(data);
+    weather(data);
   } catch (err) {
     if (err.name === "TypeError") {
-      showError("Сетевая ошибка или запрос заблокирован.");
+      error("Сетевая ошибка или запрос заблокирован.");
     } else {
-      showError(err.message || "Не удалось получить данные");
+      error(err.message || "Не удалось получить данные");
     }
   } finally {
-    setLoading(false);
+    load(false);
   }
 });
